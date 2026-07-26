@@ -1,0 +1,16 @@
+[
+  "models/__init__.py",
+  "models/assay.py",
+  "models/plate_layout.py",
+  "db/__init__.py",
+  "db/assay_serialize.py",
+  "utils/__init__.py",
+  "utils/i18n.py",
+  "utils/controls.py",
+  "utils/csv_export.py",
+  "utils/csv_import.py",
+  "utils/xml_import.py",
+  "utils/fmt.py",
+  "utils/mastermix_calc.py",
+  "utils/pdf_export.py"
+]

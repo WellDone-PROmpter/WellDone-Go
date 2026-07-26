@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WellDone! Go</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="hleft">
+    <img class="hlogo" src="logo.png" alt="WellDone! Logo">
+    <div class="htext">
+      <h1>WellDone! <span class="gobadge">Go</span></h1>
+      <p class="tagline" data-i18n="tagline">Plattenbelegung für den Roche LightCycler PRO – im Browser</p>
+    </div>
+  </div>
+  <div class="hright">
+    <div class="langsw" role="group" aria-label="Sprache / Language">
+      <button type="button" id="btn-de" onclick="WDApp.setLang('de')" aria-pressed="true">DE</button>
+      <button type="button" id="btn-en" onclick="WDApp.setLang('en')" aria-pressed="false">EN</button>
+    </div>
+    <span id="status" class="status" data-i18n="starting">Starte …</span>
+  </div>
+</header>
+
+<div id="boot" class="boot">
+  <div class="spinner" aria-hidden="true"></div>
+  <p data-i18n="booting">Der WellDone-Kern wird im Browser geladen … (beim ersten Mal einige Sekunden)</p>
+</div>
+
+<main id="app" class="app" hidden>
+  <!-- Linke Spalte: die beiden Platten -->
+  <section class="col plates">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="headline">
+          <h2 data-i18n="samplePlate">1. Proben-Platte</h2>
+          <span id="importMsg" class="headnote" data-i18n="sampleSub">Proben eingeben, einscannen, vom MP96 importieren oder aus Excel kopieren</span>
+        </div>
+        <div class="panel-actions">
+          <button type="button" class="btn ghost small" onclick="document.getElementById('impFile').click()" data-i18n="importSamples">⭳ Proben importieren</button>
+          <button type="button" class="btn ghost small" onclick="WDApp.clearSamples()" data-i18n="clear">Leeren</button>
+          <input id="impFile" type="file" accept=".xml,.csv,.txt" hidden onchange="WDApp.importSamplesFile(this)">
+        </div>
+      </div>
+      <div id="sourcePlate" class="plate source"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2 data-i18n="pcrPlate">4. PCR-Platte</h2>
+        <div class="panel-actions">
+          <button type="button" id="pdfBtn" class="btn small" onclick="WDApp.downloadPdf()" disabled data-i18n="downloadPdf">⬇ Pipettierschema-PDF</button>
+          <button type="button" id="csvBtn" class="btn small" onclick="WDApp.downloadCsv()" disabled data-i18n="downloadCsv">⬇ LC-PRO-CSV</button>
+          <button type="button" class="btn ghost small" onclick="WDApp.clearResult()" data-i18n="clear">Leeren</button>
+        </div>
+      </div>
+      <div id="pcrPlate" class="plate pcr"></div>
+      <div id="legend" class="legend"></div>
+    </div>
+  </section>
+
+  <!-- Rechte Spalte: Assays + Lauf -->
+  <aside class="col sidebar">
+    <div class="panel">
+      <div class="panel-head">
+        <h2 data-i18n="assays">2. Assays</h2>
+        <div class="panel-actions">
+          <button type="button" class="btn ghost small" onclick="WDApp.exportLibrary()" data-i18n="exportLib">⬇ Export</button>
+          <button type="button" class="btn ghost small" onclick="document.getElementById('libFile').click()" data-i18n="importLib">⬆ Import</button>
+          <input id="libFile" type="file" accept=".json,application/json" hidden onchange="WDApp.importFile(this)">
+        </div>
+      </div>
+      <p class="hint" data-i18n="assayHint">Anhaken, welche Assays auf die Platte sollen (nur ein PCR-Profil je Platte).</p>
+      <p id="libMsg" class="hint" hidden></p>
+      <ul id="assayList" class="assay-list"></ul>
+
+      <details class="addbox" id="assayBox">
+        <summary data-i18n="addAssay">+ Assay anlegen</summary>
+        <div id="addFormHost"></div>
+      </details>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2 data-i18n="run">3. Belegung</h2>
+        <div class="panel-actions">
+          <select id="direction" class="dirsel" aria-label="Richtung">
+            <option value="col" data-i18n="colwise">spaltenweise</option>
+            <option value="row" data-i18n="rowwise">zeilenweise</option>
+          </select>
+        </div>
+      </div>
+      <div class="runform">
+        <label><span data-i18n="plateName">Plattenname</span>
+          <input id="plateName" type="text" placeholder="Testlauf"></label>
+        <label><span data-i18n="plateId">Plate-ID</span>
+          <input id="plateId" type="text" placeholder="PL01"></label>
+        <button type="button" class="btn primary" onclick="WDApp.runLayout()" data-i18n="runBtn">▶ Plattenbelegung ausführen</button>
+        <div id="runStatus" class="warnings" hidden></div>
+      </div>
+    </div>
+
+    <p class="disclaimer" data-i18n="disclaimer">⚠️ Hilfswerkzeug, kein Medizinprodukt, nicht validiert. Belegung, Kontrollen und Mengen vor jedem Lauf prüfen.</p>
+
+    <div class="panel sister">
+      <p class="l-de">Du brauchst mehr? 384-Wells, Standards, feste Kontroll-Positionen, LC480-/LC96-Export – das volle <strong>WellDone!</strong> als Windows-Programm:
+        <a href="https://welldone-prompter.github.io/WellDone/">WellDone! herunterladen</a>. Schwester-App: <a href="https://welldone-prompter.github.io/PROmpter-Go/">PROmpter Go</a> (Auswertung <em>nach</em> dem Lauf).</p>
+      <p class="l-en">Need more? 384 wells, standards, fixed control positions, LC480/LC96 export – the full <strong>WellDone!</strong> as a Windows program:
+        <a href="https://welldone-prompter.github.io/WellDone/">Download WellDone!</a>. Sister app: <a href="https://welldone-prompter.github.io/PROmpter-Go/">PROmpter Go</a> (evaluation <em>after</em> the run).</p>
+    </div>
+  </aside>
+</main>
+
+<script src="pybridge.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
