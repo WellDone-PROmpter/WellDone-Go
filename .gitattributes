@@ -1,0 +1,2 @@
+# Selbst gehostetes Pyodide byte-genau speichern (SHA-256 siehe pyodide/THIRD_PARTY_NOTICES.md)
+pyodide/** -text

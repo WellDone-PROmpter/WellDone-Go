@@ -7,10 +7,16 @@
 (function (global) {
   "use strict";
 
-  // Für die lokale Entwicklung: Pyodide vom CDN. Für die Veröffentlichung wird die
-  // Pyodide-Distribution selbst gehostet (gesperrte Netze blockieren evtl. CDNs) —
-  // dann nur diese eine URL auf den eigenen Pfad ändern.
-  var PYODIDE_URL = "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/";
+  // Pyodide 0.26.4 wird SELBST gehostet: Laufzeit + alle Python-Pakete liegen im Ordner
+  // pyodide/ neben index.html (Lizenzen: pyodide/THIRD_PARTY_NOTICES.md). Keine Anfrage
+  // an ein CDN oder PyPI — Datenschutz + gesperrte Klinik-Netze. Gegen die Seiten-URL
+  // aufgelöst → passt für Dev (/web/pyodide/) und Pages (/pyodide/) gleichermaßen.
+  var PYODIDE_URL = new URL("pyodide/", document.baseURI).href;
+  // Pakete für loadPackage: Namen aus pyodide-lock.json (Wheel liegt direkt in pyodide/)
+  // bzw. lokale Wheels aus pyodide/wheels/ (reine Python-Wheels von PyPI, dort nicht im Lock).
+  // reportlab braucht pillow + charset-normalizer (beide im Lock).
+  var PY_PACKAGES = ["pillow", "charset-normalizer"];
+  var PY_WHEELS = ["reportlab-5.0.1-py3-none-any.whl"];
   // Basis, unter der die Kern-.py liegen. Zwei Layouts, EINE Datei:
   //  • Dev: Projekt-Root wird serviert, die Web-App liegt unter /web/ → "../" trifft /models, /utils, /db.
   //  • Pages (Repo WellDone-Go): index.html + models/ + db/ + utils/ liegen zusammen
@@ -74,10 +80,10 @@
       return chain;
     }).then(function () {
       status("Bibliothek (reportlab) wird geladen …");
-      return _pyodide.loadPackage("micropip");
-    }).then(function () {
-      var micropip = _pyodide.pyimport("micropip");
-      return micropip.install(["reportlab"]);   // für das Pipettierschema-PDF
+      // Alles vom eigenen Server (absolute URLs unter PYODIDE_URL) — für das Pipettierschema-PDF.
+      return _pyodide.loadPackage(PY_PACKAGES.concat(PY_WHEELS.map(function (w) {
+        return PYODIDE_URL + "wheels/" + w;
+      })));
     }).then(function () {
       _pyodide.runPython("import sys; sys.path.insert(0, '" + FS_ROOT + "')");
       _webapi = _pyodide.pyimport("webapi");

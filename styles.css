@@ -139,3 +139,7 @@ html[data-lang="en"] .l-de { display: none !important; }
 
 .disclaimer { font-size: 12px; color: var(--warn-ink); background: var(--warn-bg); border: 1px solid var(--warn-br);
   border-radius: 8px; padding: 10px 12px; margin: 0; }
+
+/* Fuss mit Impressum & Datenschutz (ausserhalb von <main>, daher auch beim Laden sichtbar) */
+.legal { text-align: center; font-size: 12.5px; color: var(--muted); padding: 0 20px 30px; }
+.legal a { color: #1565C0; }

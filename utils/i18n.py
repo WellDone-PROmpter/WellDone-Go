@@ -44,32 +44,48 @@ def tr(_src: str, **kwargs) -> str:
 # ───────────────────────────────────────────────────────────────────────────
 _EN: dict[str, str] = {
     # ── Über/App (utils/resources.py, about_dialog) ───────────────────────
-    "Plattenbelegung für den Roche LightCycler PRO":
-        "Plate setup for the Roche LightCycler PRO",
+    "Plattenbelegung – kompatibel mit LightCycler® PRO":
+        "Plate setup – compatible with LightCycler® PRO",
     "Über {name} / Hilfe": "About {name} / Help",
     "Version {v} · {b}": "Version {v} · {b}",
     "Deine Version: {v}": "Your version: {v}",
     "⬇  Neue Version herunterladen": "⬇  Download new version",
     "Erfasst Proben, belegt die PCR-Platte automatisch und erzeugt das "
-    "Pipettierschema (PDF) sowie das Plate-Setup (CSV) für den Roche "
-    "LightCycler PRO.":
+    "Pipettierschema (PDF) sowie das Plate-Setup (CSV) – kompatibel mit "
+    "LightCycler® PRO.":
         "Records samples, sets up the PCR plate automatically and creates the "
-        "pipetting scheme (PDF) and the plate setup (CSV) for the Roche LightCycler PRO.",
-    "Hinweis: Hilfswerkzeug, nicht validiert – bitte Belegung, Kontrollen "
-    "und MasterMix-Mengen vor jedem Lauf prüfen.":
-        "Note: helper tool, not validated – please check setup, controls and "
-        "MasterMix volumes before every run.",
+        "pipetting scheme (PDF) and the plate setup (CSV) – compatible with LightCycler® PRO.",
+    "Hinweis: kostenloses, nicht validiertes Hilfswerkzeug zur Vorbereitung "
+    "von qPCR-Läufen; es wertet keine Messergebnisse aus. Nicht als "
+    "Medizinprodukt oder In-vitro-Diagnostikum in Verkehr gebracht, keine "
+    "CE-Kennzeichnung, regulatorisch nicht formal geprüft. Vor dem "
+    "Routineeinsatz im Qualitätsmanagement des Labors prüfen und freigeben; "
+    "Belegung, Kontrollen und MasterMix-Mengen vor jedem Lauf prüfen. "
+    "Die Haftung richtet sich nach den gesetzlichen Vorschriften.":
+        "Note: free, non-validated helper tool for preparing qPCR runs; it does "
+        "not evaluate any measurement results. Not placed on the market as a "
+        "medical device or in vitro diagnostic device, no CE marking, no formal "
+        "regulatory assessment. Before routine use, the laboratory must check and "
+        "release it within its quality management; check setup, controls and "
+        "MasterMix volumes before every run. Liability is governed by the "
+        "statutory provisions.",
     "📖  Handbuch öffnen (PDF)": "📖  Open manual (PDF)",
     '🌐 <a href="{url}">Download- &amp; Infoseite (GitHub)</a>':
         '🌐 <a href="{url}">Downloads &amp; info page (GitHub)</a>',
     '🧪 Schwester-App: <a href="{url}">PROmpter</a> — bereitet die '
     'Ergebnisse des LightCycler PRO <b>nach</b> dem Lauf zu PDF-Bericht '
-    '&amp; Excel-Tabelle auf. (WellDone = Vorbereitung, PROmpter = Auswertung.)':
+    '&amp; Excel-Tabelle auf. (WellDone = Vorbereitung, PROmpter = Ergebnis-Übersicht.)':
         '🧪 Sister app: <a href="{url}">PROmpter</a> — turns the LightCycler PRO '
         'results <b>after</b> the run into a PDF report &amp; Excel table. '
-        '(WellDone = preparation, PROmpter = analysis.)',
+        '(WellDone = preparation, PROmpter = results overview.)',
     "Feedback & Verbesserungsvorschläge": "Feedback & suggestions",
     "Open-Source-Bibliotheken: ": "Open-source libraries: ",
+    '„Roche“, „LightCycler“ und „MagNA Pure“ sind Marken der jeweiligen '
+    'Inhaber. WellDone! ist ein unabhängiges, privates Projekt, nicht von '
+    'Roche geprüft oder verantwortet.':
+        '“Roche”, “LightCycler” and “MagNA Pure” are trademarks of their respective '
+        'owners. WellDone! is an independent, private project, neither reviewed by '
+        'nor the responsibility of Roche.',
     "Schließen": "Close",
     "Abbrechen": "Cancel",
     "Speichern": "Save",
@@ -93,8 +109,8 @@ _EN: dict[str, str] = {
         "Your version: {v}  ·  current version could not be checked (offline?).",
 
     # ── Hauptfenster (ui/main_window.py) ───────────────────────────────────
-    "WellDone! — Plattenbelegung für den Roche LightCycler PRO":
-        "WellDone! — Plate setup for the Roche LightCycler PRO",
+    "WellDone! — Plattenbelegung – kompatibel mit LightCycler® PRO":
+        "WellDone! — Plate setup – compatible with LightCycler® PRO",
     "PROBEN-PLATTE": "SAMPLE PLATE",
     "PCR-PLATTE": "PCR PLATE",
     "Richtung, in der der Cursor/Scanner durch die Wells springt":

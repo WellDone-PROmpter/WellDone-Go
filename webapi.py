@@ -122,7 +122,7 @@ def export_pdf(payload_json):
     if not assignments:
         return json.dumps({"ok": False, "error": "empty", "warnings": list(warnings)})
 
-    # Lazy: reportlab + PDF-Modul erst hier (im Browser via micropip installiert).
+    # Lazy: reportlab + PDF-Modul erst hier (im Browser lokal aus pyodide/ geladen).
     # summarize_assignments ist die GETEILTE Zählung (auch der Desktop nutzt sie) →
     # die MasterMix-Mengen im PDF können nicht von der Desktop-Version abweichen.
     from utils.mastermix_calc import summarize_assignments

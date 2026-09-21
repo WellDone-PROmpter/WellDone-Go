@@ -12,7 +12,7 @@
   // ── i18n (nur Oberflächen-Texte; Fachbegriffe/Assay-Daten bleiben unverändert) ──
   var I18N = {
     de: {
-      tagline: "Plattenbelegung für den Roche LightCycler PRO – im Browser",
+      tagline: "Plattenbelegung im Browser – kompatibel mit LightCycler® PRO",
       starting: "Starte …", booting: "Der WellDone-Kern wird im Browser geladen … (beim ersten Mal einige Sekunden)",
       ready: "bereit ✓",
       samplePlate: "1. Proben-Platte", clear: "Leeren", importSamples: "⭳ Proben importieren",
@@ -32,7 +32,8 @@
       run: "3. Belegung", plateName: "Plattenname (erscheint überall)", plateId: "Plate-ID (= Barcode der PCR-Platte)",
       colwise: "spaltenweise", rowwise: "zeilenweise",
       runBtn: "▶ Plattenbelegung ausführen",
-      disclaimer: "⚠️ Hilfswerkzeug, kein Medizinprodukt, nicht validiert. Belegung, Kontrollen und Mengen vor jedem Lauf prüfen.",
+      disclaimer: "⚠️ Nicht validiertes Hilfswerkzeug – nicht als Medizinprodukt/IVD in Verkehr gebracht, keine CE-Kennzeichnung. Belegung, Kontrollen und Mengen vor jedem Lauf prüfen; vor dem Routineeinsatz im Labor-QM freigeben.",
+      legalImprint: "Impressum", legalPrivacy: "Datenschutz",
       needAssay: "Bitte mindestens einen Assay anhaken.",
       needSamples: "Bitte mindestens eine Probe eintragen.",
       needName: "Anzeigename, LCAP-Name und PCR-Profil sind Pflicht.",
@@ -48,7 +49,7 @@
       chkBad: "{n} Probe(n) mit unzulässigen Zeichen: {list}"
     },
     en: {
-      tagline: "Plate setup for the Roche LightCycler PRO – in the browser",
+      tagline: "Plate layout in your browser – compatible with LightCycler® PRO",
       starting: "Starting …", booting: "Loading the WellDone core in the browser … (a few seconds the first time)",
       ready: "ready ✓",
       samplePlate: "1. Sample plate", clear: "Clear", importSamples: "⭳ Import samples",
@@ -68,7 +69,8 @@
       run: "3. Layout", plateName: "Plate name (appears everywhere)", plateId: "Plate ID (= barcode of the PCR plate)",
       colwise: "column-wise", rowwise: "row-wise",
       runBtn: "▶ Run plate layout",
-      disclaimer: "⚠️ Helper tool, not a medical device, not validated. Check the layout, controls and volumes before every run.",
+      disclaimer: "⚠️ Non-validated helper tool – not placed on the market as a medical device/IVD, no CE marking. Check the layout, controls and volumes before every run; release it in your lab's QM before routine use.",
+      legalImprint: "Legal notice", legalPrivacy: "Privacy",
       needAssay: "Please tick at least one assay.",
       needSamples: "Please enter at least one sample.",
       needName: "Display name, LCAP name and PCR profile are required.",
